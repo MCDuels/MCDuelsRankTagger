@@ -2,7 +2,7 @@
 
 A Fabric client-side mod that displays players' [MCDuels](https://mcduels.com) ranks above their nametags in-game.
 
-The prefix shows each player's kit icon and their highest tier (e.g. `⚔ HT3 | playername`), so you can tell who you're up against at a glance.
+The prefix shows each player's kit icon and their highest tier so you can tell who you're up against at a glance.
 
 ## Features
 
@@ -83,3 +83,7 @@ hook this mod injects, so they cannot be supported without a separate mixin.
 ## License
 
 [MIT](LICENSE)
+
+## Credits
+- Original source by [baldzika](https://github.com/baldzikaa)
+- Forked and made official by MCDuels
