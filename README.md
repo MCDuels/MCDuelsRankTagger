@@ -2,6 +2,8 @@
 
 A Fabric client-side mod that displays players' [MCDuels](https://mcduels.com) ranks above their nametags in-game.
 
+[Original mod](https://github.com/baldzikaa/MCDuelsRankTaggerFabric) by [baldzikaa](https://github.com/baldzikaa).
+
 The prefix shows each player's kit icon and their highest tier so you can tell who you're up against at a glance.
 
 ## Features
