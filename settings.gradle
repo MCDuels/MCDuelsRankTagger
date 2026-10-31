@@ -4,4 +4,14 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
 rootProject.name = "mcduels-tagger"
+
+include 'common'
+file('versions').listFiles().findAll { it.isDirectory() }.sort { it.name }.each {
+    include "versions:${it.name}"
+}

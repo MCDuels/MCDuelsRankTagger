@@ -1,7 +1,0 @@
-{
-  "required": true,
-  "package": "com.mcduelstagger.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": ["PlayerRendererMixin"],
-  "injectors": { "defaultRequire": 0 }
-}

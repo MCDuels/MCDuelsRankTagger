@@ -8,17 +8,17 @@ The prefix shows each player's kit icon and their highest tier so you can tell w
 
 ## Features
 
-- Floating nametag prefix with kit icon + highest tier across all 9 kits (Axe, Crystal, Mace, NethOp, Pot, SMP, Spear Mace, Sword, UHC)
-- Picks the kit with the highest rank automatically
+- Floating nametag prefix with the MCDuels rank badge and tier-coloured kit icon, the same art the MCDuels resource pack draws on its own nametags (including the Spear Mace icons)
+- Picks the kit with the highest rank automatically across all 9 kits (Axe, Crystal, Mace, NethOp, Pot, SMP, Spear Mace, Sword, UHC)
+- Steps aside on MCDuels when you accepted the server resource pack, since the server already shows ranks there; decline the pack and the tagger stays on
 - Two-tier cache (in-memory + on-disk) — survives client restarts
 - Async API lookups — rendering is never blocked on I/O
 - Configurable via [ModMenu](https://modrinth.com/mod/modmenu) + toggle keybind
-- Works on any Minecraft 1.21.4 server
 
 ## Requirements
 
-- Minecraft **1.21.4** or newer (1.21.x)
-- **Java 21** (required by Minecraft 1.21.4+)
+- Minecraft **1.21.2 – 26.3** (pick the jar for your version, see below)
+- **Java 21** (1.21.x) or **Java 25** (26.x)
 - [Fabric Loader](https://fabricmc.net/) 0.16.0 or newer
 - [Fabric API](https://modrinth.com/mod/fabric-api)
 - [Cloth Config API](https://modrinth.com/mod/cloth-config)
@@ -26,13 +26,26 @@ The prefix shows each player's kit icon and their highest tier so you can tell w
 
 ## Installation
 
-1. Install Fabric Loader for Minecraft 1.21.4.
-2. Drop Fabric API, Cloth Config, and `mcduels-tagger-<version>.jar` into your `mods/` folder.
+1. Install Fabric Loader for your Minecraft version.
+2. Drop Fabric API, Cloth Config, and the matching `mcduels-tagger-<version>+<minecraft>.jar` into your `mods/` folder.
 3. Launch Minecraft.
+
+| Minecraft          | Jar                                 |
+|--------------------|-------------------------------------|
+| 1.21.2 – 1.21.3    | `mcduels-tagger-0.3.0+1.21.2.jar`   |
+| 1.21.4             | `mcduels-tagger-0.3.0+1.21.4.jar`   |
+| 1.21.5             | `mcduels-tagger-0.3.0+1.21.5.jar`   |
+| 1.21.6 – 1.21.8    | `mcduels-tagger-0.3.0+1.21.6.jar`   |
+| 1.21.9 – 1.21.10   | `mcduels-tagger-0.3.0+1.21.9.jar`   |
+| 1.21.11            | `mcduels-tagger-0.3.0+1.21.11.jar`  |
+| 26.1 – 26.1.2      | `mcduels-tagger-0.3.0+26.1.jar`     |
+| 26.2               | `mcduels-tagger-0.3.0+26.2.jar`     |
+| 26.3               | `mcduels-tagger-0.3.0+26.3.jar`     |
 
 ## Usage
 
 - Join any server. Player nametags will show their MCDuels rank prefix automatically.
+- On MCDuels (`*.mcduels.com`, or any server that sends the MCDuels pack) the tagger turns itself off while the MCDuels pack is accepted, and back on if you decline it or it fails to load.
 - Press the toggle keybind (configurable in **Options → Controls**) to show/hide tags.
 - Open **Mods → MCDuels Rank Tagger → Config** (via ModMenu) to:
   - Choose which kits count toward the "highest rank" calculation
@@ -44,43 +57,29 @@ The prefix shows each player's kit icon and their highest tier so you can tell w
 
 ## Building from source
 
-```sh
-./gradlew build
-```
-
-The output jar will be in `build/libs/`.
-
-## Compatibility
-
-Mojang refactored `PlayerEntityRenderer` between 1.21.8 and 1.21.11
-(generified, swapped `AbstractClientPlayerEntity` for `PlayerLikeEntity`,
-changed the `Style.withFont` parameter, etc.), so a single jar cannot bind
-on both ranges. This repo therefore ships **two parallel branches**:
-
-| Minecraft        | Branch / tag                     | Jar version | Status                              |
-|------------------|----------------------------------|-------------|-------------------------------------|
-| 1.21.4 – 1.21.8  | [`legacy/1.21.4`](../../tree/legacy/1.21.4) / [`v0.1.1`](../../releases/tag/v0.1.1) | `0.1.1`     | ✅ Tested                           |
-| 1.21.9, 1.21.10  | either branch                    | —           | ⚠️ Untested — try the closer build |
-| 1.21.11          | [`main`](../../tree/main) / [`v0.2.0`](../../releases/tag/v0.2.0) | `0.2.0`     | ✅ Tested                           |
-| 1.21.12+         | `main`                           | `0.2.x`     | ✅ Likely works (please report)     |
-| ≤ 1.21.3         | —                                | —           | ❌ Not supported (no `EntityRenderState`) |
-| 1.20.x           | —                                | —           | Planned                             |
-
-**Picking the right branch when building from source:**
+Gradle must run on **Java 25** (Fabric Loom 1.19 needs it); the 1.21.x targets still compile for Java 21.
 
 ```sh
-# For Minecraft 1.21.11+
-git checkout main
-./gradlew build
-
-# For Minecraft 1.21.4 – 1.21.8
-git checkout legacy/1.21.4
-./gradlew build
+./gradlew build                       # every version
+./gradlew :versions:1.21.11:build     # one version
 ```
 
-**Why 1.21.4 is the floor:** Mojang introduced the `EntityRenderState`
-snapshot system in 1.21.4. Older versions don't have the `updateRenderState`
-hook this mod injects, so they cannot be supported without a separate mixin.
+Jars land in `versions/<minecraft>/build/libs/`.
+
+### Layout
+
+```
+common/                  pure-Java logic + tests (API client, cache, ranks, MCDuels pack detection)
+fabric/src/main/         Minecraft code shared by every version (Mojang mappings)
+fabric/src/variants/     small per-version shims where Minecraft or Fabric API changed
+versions/<minecraft>/    one Gradle project per target: dependency pins + which variants it uses
+gradle/fabric-target.gradle  build logic applied to every target
+```
+
+Every target is compiled against official Mojang names (1.21.x via Loom's Mojang mappings,
+26.x is unobfuscated), so almost all code is shared. A new Minecraft version usually only needs a
+`versions/<minecraft>/gradle.properties` file; when an API moves, add a variant directory with the
+new shim and list it in that file's `variants`.
 
 ## License
 

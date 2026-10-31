@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "com.mcduelstagger.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["NameTagMixin", "ServerPackOfferMixin", "ServerPackResponseMixin"],
+  "injectors": { "defaultRequire": 1 }
+}
