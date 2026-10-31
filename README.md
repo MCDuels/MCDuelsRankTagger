@@ -32,15 +32,15 @@ The prefix shows each player's kit icon and their highest tier so you can tell w
 
 | Minecraft          | Jar                                 |
 |--------------------|-------------------------------------|
-| 1.21.2 – 1.21.3    | `mcduels-tagger-0.3.0+1.21.2.jar`   |
-| 1.21.4             | `mcduels-tagger-0.3.0+1.21.4.jar`   |
-| 1.21.5             | `mcduels-tagger-0.3.0+1.21.5.jar`   |
-| 1.21.6 – 1.21.8    | `mcduels-tagger-0.3.0+1.21.6.jar`   |
-| 1.21.9 – 1.21.10   | `mcduels-tagger-0.3.0+1.21.9.jar`   |
-| 1.21.11            | `mcduels-tagger-0.3.0+1.21.11.jar`  |
-| 26.1 – 26.1.2      | `mcduels-tagger-0.3.0+26.1.jar`     |
-| 26.2               | `mcduels-tagger-0.3.0+26.2.jar`     |
-| 26.3               | `mcduels-tagger-0.3.0+26.3.jar`     |
+| 1.21.2 – 1.21.3    | `mcduels-tagger-1.1+1.21.2.jar`     |
+| 1.21.4             | `mcduels-tagger-1.1+1.21.4.jar`     |
+| 1.21.5             | `mcduels-tagger-1.1+1.21.5.jar`     |
+| 1.21.6 – 1.21.8    | `mcduels-tagger-1.1+1.21.6.jar`     |
+| 1.21.9 – 1.21.10   | `mcduels-tagger-1.1+1.21.9.jar`     |
+| 1.21.11            | `mcduels-tagger-1.1+1.21.11.jar`    |
+| 26.1 – 26.1.2      | `mcduels-tagger-1.1+26.1.jar`       |
+| 26.2               | `mcduels-tagger-1.1+26.2.jar`       |
+| 26.3               | `mcduels-tagger-1.1+26.3.jar`       |
 
 ## Usage
 

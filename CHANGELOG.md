@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 — 2026-10-30
+## 1.1 — 2026-10-30
 - **Minecraft 1.21.2 – 26.3 support.** One build produces a jar per version range (1.21.2, 1.21.4, 1.21.5, 1.21.6, 1.21.9, 1.21.11, 26.1, 26.2, 26.3); see the README table.
 - Moved to official Mojang mappings and split the code into `common/` (pure Java, tested), shared Minecraft code, and small per-version variants. Fabric Loom 1.19.3, Gradle 9.8.2.
 - Nametag prefix now uses the MCDuels resource pack art: rank badge plus tier-coloured kit icon, including the new Spear Mace icons. Crystal uses the pack's "vanilla" set and Mace the SMP set, matching the server.
